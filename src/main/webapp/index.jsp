@@ -1,4 +1,39 @@
 <html>
+
+<%!private float calcularImc(float peso, float altura) {
+  return peso / (altura * altura);
+}%>
+
+<%!private String resultadoImc(float imc, String sexo) {
+  String result = "";
+  if (sexo.equalsIgnoreCase("M")) {
+    if (imc < 20.7) {
+      result = "Abaixo do peso.";
+    } else if (imc < 26.4) {
+      result = "Peso normal.";
+    } else if (imc < 27.8) {
+      result = "Marginalmente acima do peso.";
+    } else if (imc < 31.1) {
+      result = "Acima do peso ideal.";
+    } else {
+      result = "Obeso.";
+    }
+  } else if (sexo.equalsIgnoreCase("F")) {
+    if (imc < 19.1) {
+      result = "Abaixo do peso.";
+    } else if (imc < 25.8) {
+      result = "Peso normal.";
+    } else if (imc < 27.3) {
+      result = "Marginalmente acima do peso.";
+    } else if (imc < 32.3) {
+      result = "Acima do peso ideal.";
+    } else {
+      result = "Obeso.";
+    }
+  }
+  return result;
+}%>
+
 <head>
 <title>Cálculo de IMC</title>
 </head>
@@ -23,32 +58,7 @@ String sexo = request.getParameter("sexo");
 if (sexo == null) {
   %><b>Informe o sexo.</b><%
 } else {
-  float imc = (peso / (altura * altura));
-  if (sexo.equalsIgnoreCase("M")) {
-    if (imc < 20.7) {
-      %><b>Abaixo do peso.</b><%
-    } else if (imc < 26.4) {
-      %><b>Peso normal.</b><%
-    } else if (imc < 27.8) {
-      %><b>Marginalmente acima do peso.</b><%
-    } else if (imc < 31.1) {
-      %><b>Acima do peso ideal.</b><%
-    } else {
-      %><b>Obeso.</b><%
-    }
-  } else if (sexo.equalsIgnoreCase("F")) {
-    if (imc < 19.1) {
-      %><b>Abaixo do peso.</b><%
-    } else if (imc < 25.8) {
-      %><b>Peso normal.</b><%
-    } else if (imc < 27.3) {
-      %><b>Marginalmente acima do peso.</b><%
-    } else if (imc < 32.3) {
-      %><b>Acima do peso ideal.</b><%
-    } else {
-      %><b>Obeso.</b><%
-    }
-  }
+  %><b><%=resultadoImc(calcularImc(peso, altura), sexo)%></b><%
 }
 %>
 </body>
