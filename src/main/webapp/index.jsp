@@ -5,9 +5,9 @@
 <body>
 	<h1>Cálculo de IMC</h1>
 	<form>
-		Peso: <input type="text" name="peso" value="<%=request.getParameter("peso")%>"><br>
-		Altura: <input type="text" name="altura" value="<%=request.getParameter("altura")%>"><br>
-		Sexo: <input type="text" name="sexo" value="<%=request.getParameter("sexo")%>"><br>
+		Peso: <input type="text" name="peso" value="${param.peso}"><br>
+		Altura: <input type="text" name="altura" value="${param.altura}"><br>
+		Sexo: <input type="text" name="sexo" value="${param.sexo}"><br>
 		<button>Calcular</button>
 	</form>
 <%
